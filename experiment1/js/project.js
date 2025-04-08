@@ -37,10 +37,10 @@ function generate() {
   }
 
   /* global box */
-  box.innerText = story;
+  $("#box").text(story);
 }
 
 /* global clicker */
-clicker.onclick = generate;
+$("#clicker").click(generate);
 
 generate();
