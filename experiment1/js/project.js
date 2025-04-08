@@ -1,10 +1,10 @@
 const fillers = {
   name: ["Susan", "Dave", "Mary", "Beth", "Sanji", "Wiskers"],
   starch: ["rice", "bread", "pasta", "potatoes"],
-  vegetables: ["broccoli", "asparagus", "lettuce","corn", "cauliflower", "onions", "carrots"],
+  vegetable: ["broccoli", "asparagus", "lettuce","corn", "cauliflower", "onions", "carrots"],
   meat: ["steak", "chicken", "bacon", "ham", "beef", "pepperoni", "pork", "duck", "lamb"],
   action: ["stir", "mix", "cook", "boil", "combine", "melt"],
-  sauce: ["soy sauce", "vinegar", "ponzu", "Worcestershire", "oyster"],
+  sauce: ["soy sauce", "vinegar", "ponzu sauce", "Worcestershire sauce", "oyster sauce"],
   time: ["30 minutes", "1 hour", "5 hours", "8 hours", "5 minutes", "30 secons","5 minutes 38 seconds", "a few hours I think"],
   cut: ["slice", "chop", "demolish", "shred", "dice", "destroy", "mash"],  
 };
