@@ -1,34 +1,46 @@
-// project.js - purpose and description here
-// Author: Your Name
-// Date:
+const fillers = {
+  name: ["Susan", "Dave", "Mary", "Beth", "Sanji", "Wiskers"],
+  starch: ["rice", "bread", "pasta", "potatoes"],
+  vegetables: ["broccoli", "asparagus", "lettuce","corn", "cauliflower", "onions", "carrots"],
+  meat: ["steak", "chicken", "bacon", "ham", "beef", "pepperoni", "pork", "duck", "lamb"],
+  action: ["stir", "mix", "cook", "boil", "combine", "melt"],
+  sauce: ["soy sauce", "vinegar", "ponzu", "Worcestershire", "oyster"],
+  time: ["30 minutes", "1 hour", "5 hours", "8 hours", "5 minutes", "30 secons","5 minutes 38 seconds", "a few hours I think"],
+  cut: ["slice", "chop", "demolish", "shred", "dice", "destroy", "mash"],  
+};
 
-// NOTE: This is how we might start a basic JavaaScript OOP project
+const template = `Hi there, I'm chef $name and this is my recipe.
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
+First you want to grab some $meat and marinate it in some $sauce for $time. Then grab some $vegetable and $cut it thoroughly. Finally bring everything together and $action it for $time. 
 
-// define a class
-class MyProjectClass {
-  // constructor function
-  constructor(param1, param2) {
-    // set properties using 'this' keyword
-    this.property1 = param1;
-    this.property2 = param2;
-  }
-  
-  // define a method
-  myMethod() {
-    // code to run when method is called
+I like to serve it all with some $starch but you can do whatever you want. 
+`;
+
+
+// STUDENTS: You don't need to edit code below this line.
+
+const slotPattern = /\$(\w+)/;
+
+function replacer(match, name) {
+  let options = fillers[name];
+  if (options) {
+    return options[Math.floor(Math.random() * options.length)];
+  } else {
+    return `<UNKNOWN:${name}>`;
   }
 }
 
-function main() {
-  // create an instance of the class
-  let myInstance = new MyProjectClass("value1", "value2");
+function generate() {
+  let story = template;
+  while (story.match(slotPattern)) {
+    story = story.replace(slotPattern, replacer);
+  }
 
-  // call a method on the instance
-  myInstance.myMethod();
+  /* global box */
+  box.innerText = story;
 }
 
-// let's get this party started - uncomment me
-//main();
+/* global clicker */
+clicker.onclick = generate;
+
+generate();
