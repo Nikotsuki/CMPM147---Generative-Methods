@@ -2,6 +2,8 @@
 
 let seed = 7;
 
+const reimagine = document.querySelector("#reimagine");
+
 const leafColor = "#719552";
 const leaf2Color = "#4b6732";
 const leaf3Color = "#637e40";
@@ -18,10 +20,29 @@ const cloudColor = "#dee5ed";
 //const cloud2Color = "#c9cdd6";
 const stemColor = "#81804d";
 
-function setup() {
-  createCanvas(400, 200);
-  createButton("reimagine").mousePressed(() => seed++);
+function resizeScreen() {
+  centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
+  centerVert = canvasContainer.height() / 2; // Adjusted for drawing logic
+  console.log("Resizing...");
+  resizeCanvas(canvasContainer.width(), canvasContainer.height());
+  // redrawCanvas(); // Redraw everything based on new size
 }
+
+function setup() {  
+  canvasContainer = $("#canvas-container");
+  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+  canvas.parent("canvas-container");
+  background(100);
+  $(window).resize(function() {
+    resizeScreen();
+  });
+  resizeScreen();
+}
+
+reimagine.addEventListener("click", (e) => {
+  seed++;
+});
+
 
 function draw() {
   randomSeed(seed);
@@ -34,28 +55,27 @@ function draw() {
   rect(0, 0, width, height);
   
   fill(sky2Color);
-  rect(0, height/2 - (70), width, height);
+  rect(0, height*0.66 - height*0.66*(5/6),width, height);
   
   fill(sky3Color);
-  rect(0, height/2 - (55), width, height);
+  rect(0, height*0.66 - height*0.66*(4/6), width, height);
   
   fill(sky4Color);
-  rect(0, height/2 - 25, width, height);
+  rect(0, height*0.66 - height*0.66*(3/6), width, height);
   
   fill(sky5Color);
-  rect(0, height/2, width, height);
+  rect(0, height*0.66 - height*0.66*(2/6), width, height);
   
   fill(sky6Color);
-  rect(0, height/2 + 20, width, height);
+  rect(0, height*0.66 - height*0.66*(1/6), width, height);
   
   fill(cloudColor);
-  const clouds = 20;
+  const clouds = 30;
   for (let i = 0; i < clouds + 1; i++) {
-    let track = (millis() / 1839.0) % 1;
     let x = width * random() + (millis() / 5000.0) % 1;
-    let y = height*random();
-    let x2 = 50 + (10*random());
-    let y2 = 90*random()*random()*random();
+    let y = height * random();
+    let x2 = width/5 + (10*random());
+    let y2 = height/3*random();
     arc(x, y, x2, y2, 0, 2*Math.PI);
     arc(x+30*random(), y+30*random(), x2 * random() + 25, y2*random() + 30, 0, 2*Math.PI);
     arc(x+10*random(), y+60*random(), x2 * random() + 25, y2*random() + 30, 0, 2*Math.PI);
@@ -64,19 +84,20 @@ function draw() {
     //fill(cloudColor);
   }
 
-  
+  //trees
   fill(treeColor);
-  const steps = 10;
+  const steps = 22;
   for (let i = 0; i < steps + 1; i++) {
     let x = (width * i) / steps;
-    arc(x, height*0.66+5, 50 + (10*random()), (90*random() * random()), 0, 2*Math.PI, PIE, 5);
+    arc(x, height*0.66+height/25, width/steps + (width/17*random()), height/steps*random() + (height/5*random()), 0, 2*Math.PI, PIE, 5);
   }
   
   fill(leafColor);
-  rect(0, height * 0.66+5, width, height * 0.66);
+  rect(0, height * 0.66+height/40, width, height * 0.66);
 
+  //dark leaves
   const scrub = mouseX/width;
-  const leaves = 4000;
+  const leaves = 2000+ 2000*random();
   for (let i = 0; i < leaves; i++) {
     let z = random();
     let x = width * ((random() + (scrub/50 + millis() / 500000.0) / z) % 1);
@@ -86,8 +107,8 @@ function draw() {
     arc(x, y+5, y/30, y/20, 0, 2 * Math.PI);
   }
   
-  
-  const leaves2 = 1500;
+  //light leaves
+  const leaves2 = 1000 + 500 * random();
   for (let i = 0; i < leaves2; i++) {
     let z = random();
     let x = width * ((random() + (scrub/50 + millis() / 500000.0) / z) % 1);
@@ -99,18 +120,18 @@ function draw() {
   
   
   const flowers = 700 + 500*random();
-
   for (let i = 0; i < flowers; i++) {
     let z = random();
     let x = width * ((random() + (scrub/50 + millis() / 500000.0) / z) % 1);
     //let s = width / 100 * z;
     let y = height * 0.66 + height / (40* z);
-    if (y >= 190){
+    if (y >= height*0.93){
       continue;
     }
-    if (y >= 170){
+    //stems
+    if (y >= height*0.85){
       stroke(stemColor);
-      line(x, y, x, y+60);
+      line(x, y, x, y+height);
       noStroke();
     }
     fill(flowerColor);
