@@ -2,7 +2,7 @@
 <html>
 <head>
 	<!-- This title is used for tabs and bookmarks -->
-	<title>Experiment X - Subject/Topic</title>
+	<title>Experiment 03 - Procedural Overworld</title>
 
 	<!-- Use UTF character set, a good idea with any webpage -->
 	<meta charset="UTF-8" />
@@ -32,30 +32,38 @@
 	<main id="content">
 		<section>
 
-			<h1>Experiment X - Subject/Topic</h1>
+			<h1>Experiment 03 - Procedural Overworld</h1>
 
 			<div class="minor-section">
 				<div id="canvas-container">
-					<!-- canvas will be added here -->
+					<span id="canvasContainer" style="margin: 10px;"></span>
+    				<textarea cols="20" rows="20" id="asciiBox" style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;"></textarea>
 				</div>
                 <div class="fullscreen-box">
                     <button id="fullscreen">Fullscreen</button>
                 </div>
+				<div class="reseed-button">
+                    <button id="reseed">Reseed</button>
+                </div>
+				<span id="seedReport"></span>
+    			<hr />
 			</div>
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
+				<p>An oldschool jrpg overworld generator. Inspired by the early Final Fantasy games and other retro titles, this generator creates islands and coastal biomes filled with trees, houses, and dark towers. </p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
+				<p>This generator makes use of the noise() function as well as autotiling logic to generate a tiled, coherent landscape. The autotiling logic makes use of bitwise shifting to create a code for each tile as well as four different tile banks depending on the context (water, grass, forest, etc.). 
+					The noise() function is used for the water tiles, grass tiles, and forest tiles. The noise value is configured at noise(i/8, j/8) to create a nice balance between x and y directions. The houses and towers were placed using the random() function set to 5% and 1% respectively. Finally, the clouds were created using the rect() function and the setAlpha() function to create the nice transparancy. The clouds use the mouse's X value and the millis() to move over time as well as respond to the user's mouse movement.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>Each person that worked on the code should reflect on the process, the difficulties, and the successes of the experiment.</p>
+				<p>Overall a pretty fun assingment that really took advantage of my love for this kind of retro aesthetic. The reason I chose my overworl generator over my dungeon one is becuase my overworld genertor both looked and worked better than my dungeon one. I struggled a lot on the dungeon generator to make it feel like each seed could be a real level in a game. I mainly struggled with the room sizes, how to connect them, and getting items like doors and chests to look good inside them. 
+					Once I decided to move on to the overworld generator, I started having much more fun as I already had a good idea of how things worked and wasn't contrained by too many borders and strict shapes. The noise function is godly and I will be using it at all tiems possible from now on.</p>
 			</div>
 
 		</section>
