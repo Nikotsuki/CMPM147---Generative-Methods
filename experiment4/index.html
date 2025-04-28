@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 04 - Infinite World</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" DEFER></script>
+	<!-- Use me for a JavaScript OOP Project -->
+	<script type="text/javascript" src="./js/project.js" DEFER></script>
+	<!-- Use me for a p5.js project -->
+	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js" integrity="sha512-b/htz6gIyFi3dwSoZ0Uv3cuv3Ony7EeKkacgrcVg8CMzu90n777qveu0PBcbZUA7TzyENGtU+qZRuFAkfqgyoQ==" crossorigin="anonymous"></script>
+</head>
+<body>
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 04 - Infinite World</h1>
+
+			<div class="minor-section">
+				<div id="canvas-container">
+				</div>
+                <div class="fullscreen-box">
+                    <button id="fullscreen">Fullscreen</button>
+                </div>
+				<label for="code">World key:</label><br>
+  				<input type="text" id="code" name="code" value="xyzzy"><br>
+    			<hr />
+			</div>
+
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>A minecraft inspired infinite world generator that borrows minecraft's basic aesthetic and procedural generation to pay homage to the legendary game. </p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>This generator makes use of the noise() function as well as autotiling logic to generate a tiled, coherent landscape. The autotiling logic makes use of bitwise shifting to create a code for each tile as well as four different tile banks depending on the context (water, grass, forest, etc.). 
+					The noise() function is used for the water tiles, grass tiles, and forest tiles. The noise value is configured at noise(i/8, j/8) to create a nice balance between x and y directions. The houses and towers were placed using the random() function set to 5% and 1% respectively. Finally, the clouds were created using the rect() function and the setAlpha() function to create the nice transparancy. The clouds use the mouse's X value and the millis() to move over time as well as respond to the user's mouse movement.</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>Overall a pretty fun assingment that really took advantage of my love for this kind of retro aesthetic. The reason I chose my overworl generator over my dungeon one is becuase my overworld genertor both looked and worked better than my dungeon one. I struggled a lot on the dungeon generator to make it feel like each seed could be a real level in a game. I mainly struggled with the room sizes, how to connect them, and getting items like doors and chests to look good inside them. 
+					Once I decided to move on to the overworld generator, I started having much more fun as I already had a good idea of how things worked and wasn't contrained by too many borders and strict shapes. The noise function is godly and I will be using it at all tiems possible from now on.</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>
