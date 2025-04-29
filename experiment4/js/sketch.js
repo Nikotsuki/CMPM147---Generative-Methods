@@ -395,7 +395,7 @@ function draw() {
     window.p3_drawBefore();
   }
 
-  let overdraw = 0.1;
+  let overdraw = 0.2;
 
   let y0 = Math.floor((0 - overdraw) * tile_rows);
   let y1 = Math.floor((1 + overdraw) * tile_rows);
@@ -501,10 +501,10 @@ function p3_worldKeyChanged(key) {
 }
 
 function p3_tileWidth() {
-  return 32;
+  return 12;
 }
 function p3_tileHeight() {
-  return 16;
+  return 6;
 }
 
 let [tw, th] = [p3_tileWidth(), p3_tileHeight()];
@@ -521,19 +521,12 @@ function p3_drawBefore() {}
 
 
 function p3_drawTile(i, j) {
-  //randomSeed(worldSeed);
-  let noiseLvl = 500;
-  let noiseScale = 0.09;
-  let nx = noiseScale * i;
-  let ny = noiseScale * j;
-  let c = noiseLvl * noise(nx, ny);
-  let noiseLevel = noise(i/6, j/5);
-  let noiseLevel2 = noise(i*12, j*0.09);
+  let noiseLevel = noise(i/10, j/9);
   //let n = clicks[[i, j]];
   noStroke();
   
   let n = clicks[[i, j]] | 0;
-  let topo = -150*noiseLevel - n * 8
+  let topo = -200*noiseLevel - n * 12
   
   beginShape();
   vertex(-tw, 0);
@@ -541,8 +534,6 @@ function p3_drawTile(i, j) {
   vertex(tw, 0);
   vertex(0, -th);
   endShape(CLOSE);
-  
-  //stroke('red');
   
   line(tw, 0, tw, topo);
   
@@ -554,42 +545,58 @@ function p3_drawTile(i, j) {
   //-tw, topo == Tleft
   //tw, topo == Tright
   //0, th+topo == Tbottom
+
   
   if (noiseLevel < 0.4){
+    let tempTopo = -40;
     fill('#357d8c') // blue
     if (noiseLevel < 0.3){
       fill('#286b81') // light blue
     }
-    quad(-tw, 0 + topo, 0, th+ topo, tw, 0+ topo, 0, -th+ topo);
-    quad(0, th+ topo, tw, 0 + topo, tw, 0,0, th); //Tbottom, TRight, Bright, Bbottom
-    quad (0, th+topo, -tw, topo, -tw, 0, 0, th);
+    quad(-tw, 0 + tempTopo, 0, th+ tempTopo, tw, 0+ tempTopo, 0, -th+ tempTopo);
+    quad(0, th+ tempTopo, tw, 0 + tempTopo, tw, 0,0, th); //Tbottom, TRight, Bright, Bbottom
+    quad (0, th+tempTopo, -tw, tempTopo, -tw, 0, 0, th);
   }
-  else{
-    fill('#5b9733'); //green
-    quad(-tw, 0 + topo, 0, th+ topo, tw, 0+ topo, 0, -th+ topo);
-    fill('#9d7a5d'); // brown
+  else if (noiseLevel >= 0.7) {
+    let tempTopo = topo * 1.0;
+    fill('#f4fafc'); //snow top
+    quad(-tw, 0 + tempTopo, 0, th+ tempTopo, tw, 0+ tempTopo, 0, -th+ tempTopo);
+    fill('#515151'); // stone right
     //sides
-    quad(0, th+ topo, tw, 0 + topo, tw, 0,0, th); //Tbottom, TRight, Bright, Bbottom
-    quad (0, th+topo, -tw, topo, -tw, 0, 0, th);
+    quad(0, th+ tempTopo, tw, 0 + tempTopo, tw, 0,0, th); // Right side
+    fill('#676767'); // stone left
+    quad (0, th+tempTopo, -tw, tempTopo, -tw, 0, 0, th); // left side
   }
-  
-  //top
-  
-  
-  
-  //push();
-
-  //if(noiseLevel2 < 0.4){
-  //  triangle(i, j, tw+ 60*noiseLevel, th- noiseLevel*60, tw + noiseLevel*100, th + noiseLevel*20);
-  //}
-  //if(0.4 < noiseLevel2 < 0.6){
-  //  rect(i + noiseLevel2*80, j, tw+ 60*noiseLevel, th+ noiseLevel*60);
-  //}
-  //if(0.4 < noiseLevel2 < 0.6){
-  //  rect(i + noiseLevel2*80, j, tw+ 60*noiseLevel, th+ noiseLevel*60);
-  //}
-
-  //pop();
+  else if (0.7 > noiseLevel && noiseLevel > 0.65){
+    let tempTopo = topo * 0.8;
+    fill('#717171'); //sand top
+    quad(-tw, 0 + tempTopo, 0, th+ tempTopo, tw, 0+ tempTopo, 0, -th+ tempTopo);
+    fill('#515151'); // sand sides
+    //sides
+    quad(0, th+ tempTopo, tw, 0 + tempTopo, tw, 0,0, th); 
+    fill('#676767'); // sand left
+    quad (0, th+tempTopo, -tw, tempTopo, -tw, 0, 0, th);
+  }
+  else if (0.65 > noiseLevel && noiseLevel > 0.50){
+    let tempTopo = topo * 0.5;
+    fill('#6ea03f'); //grass top
+    quad(-tw, 0 + tempTopo, 0, th+ tempTopo, tw, 0+ tempTopo, 0, -th+ tempTopo);
+    fill('#6e5038'); // dirt right
+    //sides
+    quad(0, th+ tempTopo, tw, 0 + tempTopo, tw, 0,0, th); 
+    fill('#7a5e46'); // dirt left
+    quad (0, th+tempTopo, -tw, tempTopo, -tw, 0, 0, th);
+  }
+  else if (0.50 > noiseLevel && noiseLevel > 0.45){
+    let tempTopo = topo * 0.5;
+    fill('#dcd6aa'); //sand top
+    quad(-tw, 0 + tempTopo, 0, th+ tempTopo, tw, 0+ tempTopo, 0, -th+ tempTopo);
+    fill('#928e7b'); // sand sides
+    //sides
+    quad(0, th+ tempTopo, tw, 0 + tempTopo, tw, 0,0, th); //Tbottom, TRight, Bright, Bbottom
+    fill('#aba17b'); // sand left
+    quad (0, th+tempTopo, -tw, tempTopo, -tw, 0, 0, th);
+  }
 }
 
 function p3_drawSelectedTile(i, j) {
