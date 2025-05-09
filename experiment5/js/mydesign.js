@@ -22,6 +22,11 @@ function getInspirations() {
         name: "Money Store - Death Grips (2012)",
         assetUrl: "img/money store.png",
         credit: "Death Grip's famous 20012 album."
+      },
+      {
+        name: "Flower",
+        assetUrl: "img/flower.jpg",
+        credit: "a single black and white flower."
       }
     ];
   }
@@ -46,7 +51,7 @@ function getInspirations() {
       fg: []
     }
     
-    for(let i = 0; i < 2000; i++) {
+    for(let i = 0; i < 3000; i++) {
       design.fg.push({x: random(width),
                       y: random(height),
                       w: random(width/2),
@@ -68,12 +73,19 @@ function getInspirations() {
       var angle = TWO_PI / 5;
       var halfAngle = angle / 2.0;
       beginShape();
+      let divide;
+      if(Math.floor(random(3)) < 2){
+        divide = 12;
+      }
+      else{
+        divide = 6;
+      }
       for (var i = 0; i < TWO_PI; i += angle) {
-        var sx = box.x + cos(i) * box.h/5;
-        var sy = box.y + sin(i) * box.h/5;
+        let sx = box.x + cos(i) * box.h/divide;
+        let sy = box.y + sin(i) * box.h/divide;
         vertex(sx, sy);
-        sx = box.x + cos(i + halfAngle) * box.w/5;
-        sy = box.y + sin(i + halfAngle) * box.w/5;
+        sx = box.x + cos(i + halfAngle) * box.w/divide;
+        sy = box.y + sin(i + halfAngle) * box.w/divide;
         vertex(sx, sy);
       }
       endShape(CLOSE);
@@ -84,14 +96,14 @@ function getInspirations() {
     design.bg = mut(design.bg, 0, 255, rate);
     for(let box of design.fg) {
       box.fill = mut(box.fill, 0, 255, rate);
-      box.x = mut(box.x, box.x - 10, width + 10, rate);
-      box.y = mut(box.y, box.y - 10, height + 10, rate);
-      box.w = mut(box.w, box.w - 10, width/2 + 10, rate);
-      box.h = mut(box.h, box.h - 10, height/2 + 10, rate);
+      box.x = mut(box.x, box.x - 12, width + 12, rate);
+      box.y = mut(box.y, box.y - 12, height + 12, rate);
+      box.w = mut(box.w, box.w - 12, width/2 + 12, rate);
+      box.h = mut(box.h, box.h - 12, height/2 + 12, rate);
     }
   }
   
   
   function mut(num, min, max, rate) {
-      return constrain(randomGaussian(num, (rate * (max - min)) / 10), min, max);
+      return constrain(randomGaussian(num, (rate * (max - min)) / 15), min, max);
   }

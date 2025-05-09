@@ -79,28 +79,27 @@
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>In this programming assignment, we're building a generator that directly reads inspiring images, renders parameterized images, and adjusts its own designs to optimize an evaluation score.</p>
+				<p>This project makes use of random mutation and annealing to create blury imitations of images.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
                 <ol>
-                    <li>This project integrates inspiring images that are selectable from the drop-down on the display page. (This could be three distinct images or one image with three different sets of clues that cause the generator to interpret it in a different way.)</li>
-                    <li>The design object is initialized in inspiration-specific ways. Selecting different inspirations should lead to different behaviors of initDesign.</li>
-                    <li>The design is rendered in a way that can possibly produce results that feel related to the inspiring images. (The 30-second annealing trick should produce images that resemble the inspiring image if we squint.)</li>
-                    <li>The mutation process makes incremental changes to your design. The rate parameter should be implemented in a way that allows the user to almost stop exploration by sliding the rate down to 1%. Your generator must respond to the mutation rate slider.</li>
+                    <li>The inspiring images for this project were inspired by popular album covers that I personally selectedd (not that there are that many monochrome album covers)</li>
+                    <li>The shapes that make up these imitations are created with an algorithm designed to make star shapes. The stars are very differnet from each other in terms of shape and size, which leads to interesting looking final imitations.</li>
+                    <li>The way the generator renders the image leaves a lot to be desired in terms of accuracy but makes up for it in uniqueness.</li>
                 </ol>
 			</div>
 
 			<div class="minor-section">
 				<h2>Annealing</h2>
-                <p>The most interesting results from this kind of evolutionary generator are often achieved by continually adjusting the mutation rate. Set the slider to 100%, reset the generator, and then slowly drag the slider down to 1% over the period of about 30 seconds. This allows the generator to make large design changes at the start while allowing it to focus on finely details towards the end. This is best done by hand while watching the outputs improve because you can use your human judgment to decide when the generator needs to be making bigger or smaller changes to keep making progress.
+                <p>When it comes to the slider and taking advantage of the annealing process, I recommend starting out at 100 but quickly moving down by around 20 percent after a few seconds. Do this until you are near 0, then leave it on 3 percent until you are satisfied with the result. I found that this method was the most efficient and led to the greatest results. 
                 </p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				<p>I was a little embrarrassed that I didn't have this wired by the time the assignment came up. But uh, being human.</p>
+				<p>A really fun assingment that mixed both personal preference and technical process to create varying unique results. Perhaps I could have spent a little more time on the mutation function, but got a little side tracked with other aspects of the process.</p>
 			</div>
 
 		</section>
