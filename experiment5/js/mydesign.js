@@ -4,14 +4,24 @@
 function getInspirations() {
     return [
       {
-        name: "Cars at night in the rain", 
-        assetUrl: "cars.jpg",
-        credit: "Cars at night in the rain."
+        name: "Aenima - Tool (1996)",
+        assetUrl: "img/aenima.png",
+        credit: "Tool's classic 1996 album."
       },
       {
-        name: "Sugar!", 
-        assetUrl: "soad.jpg",
-        credit: "System of a Down's debut, self titled, 1998 album."
+        name: "Kendrick Lamar GNX (2024)",
+        assetUrl: "img/GNX.jpeg",
+        credit: "Kenrick Lamar's most recent, smash hit 2024 album."
+      },
+      {
+        name: "To Pimp a Butterfly - Kendrick Lamar (2015)",
+        assetUrl: "img/TPAB.jpg",
+        credit: "Kendrick Lamar's legendary 2015 album."
+      },
+      {
+        name: "Money Store - Death Grips (2012)",
+        assetUrl: "img/money store.png",
+        credit: "Death Grip's famous 20012 album."
       }
     ];
   }
@@ -22,7 +32,7 @@ function getInspirations() {
     let canvasWidth = canvasContainer.width(); // Get the width of the container
     let aspectRatio = inspiration.image.height / inspiration.image.width;
     let canvasHeight = canvasWidth * aspectRatio; // Calculate the height based on the aspect ratio
-    resizeCanvas(canvasWidth, canvasHeight);
+    resizeCanvas(inspiration.image.width / 2, inspiration.image.height / 2);
     $(".caption").text(inspiration.credit); // Set the caption text
   
     // add the original image to #original
@@ -32,11 +42,11 @@ function getInspirations() {
   
     
     let design = {
-      bg: 128,
+      bg: 0,
       fg: []
     }
     
-    for(let i = 0; i < 100; i++) {
+    for(let i = 0; i < 2000; i++) {
       design.fg.push({x: random(width),
                       y: random(height),
                       w: random(width/2),
@@ -52,7 +62,21 @@ function getInspirations() {
     noStroke();
     for(let box of design.fg) {
       fill(box.fill, 128);
-      rect(box.x, box.y, box.w, box.h);
+      //rect(box.x, box.y, box.w, box.h);
+      //stroke(box.fill, 128)
+      //ellipse(box.x, box.y, box.w / 2, box.h / 2);
+      var angle = TWO_PI / 5;
+      var halfAngle = angle / 2.0;
+      beginShape();
+      for (var i = 0; i < TWO_PI; i += angle) {
+        var sx = box.x + cos(i) * box.h/5;
+        var sy = box.y + sin(i) * box.h/5;
+        vertex(sx, sy);
+        sx = box.x + cos(i + halfAngle) * box.w/5;
+        sy = box.y + sin(i + halfAngle) * box.w/5;
+        vertex(sx, sy);
+      }
+      endShape(CLOSE);
     }
   }
   
@@ -60,10 +84,10 @@ function getInspirations() {
     design.bg = mut(design.bg, 0, 255, rate);
     for(let box of design.fg) {
       box.fill = mut(box.fill, 0, 255, rate);
-      box.x = mut(box.x, 0, width, rate);
-      box.y = mut(box.y, 0, height, rate);
-      box.w = mut(box.w, 0, width/2, rate);
-      box.h = mut(box.h, 0, height/2, rate);
+      box.x = mut(box.x, box.x - 10, width + 10, rate);
+      box.y = mut(box.y, box.y - 10, height + 10, rate);
+      box.w = mut(box.w, box.w - 10, width/2 + 10, rate);
+      box.h = mut(box.h, box.h - 10, height/2 + 10, rate);
     }
   }
   
